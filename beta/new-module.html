@@ -1,0 +1,258 @@
+
+<link href='https://fonts.googleapis.com' rel='preconnect'/>
+<link crossorigin='crossorigin' href='https://fonts.gstatic.com' rel='preconnect'/>
+<link href='https://fonts.googleapis.com/css2?family=Glegoo:wght@400;700&display=swap' rel='stylesheet'/> 
+     
+<script crossorigin='anonymous' defer='defer'  src='https://kit.fontawesome.com/378be5ec82.js'></script>  
+  
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Oswald&display=swap'); 
+   
+   * { margin: 0 auto; box-sizing: border-box; margin: auto; font-family: 'Open Sans', sans-serif; -webkit-user-select: none !important; -moz-user-select: -moz-none !important; -ms-user-select: none !important; user-select: none !important;   -webkit-tap-highlight-color: transparent; }
+    
+  html { scroll-behavior: smooth; }
+   
+  .glegoo  * { font-family: 'Glegoo', serif; text-align: justify!important; }
+
+.padding15, #result_out, #timed_out { font-family: 'Open Sans', sans-serif!important; }
+#timed_out { text-align: center; }
+  .question, .answer *{ font-family: 'Glegoo', serif!important; text-align: justify!important; }
+    
+    #container { z-index: 1; 
+      display: block; 
+      padding-bottom: 55px;  
+      width: 97%; 
+      margin: auto; 
+      background-color: #fff;   min-height: 400px;
+    } 
+    
+.question  { background-color: #f7fcff; padding: 2px 10px; border: 1px solid #233373; 
+     text-align: justify;   
+      width: 99%;
+      font-size: 19px;
+      margin-bottom: 2px;
+      color: #233373;
+      cursor: default;
+      font-weight: bold;
+      }
+     
+      .option{   margin-top: 8px!important;
+        width: 100%;   
+        color: #000000;  
+        background: #f7fcff;  
+        border-radius: 5px;
+        font-size: 17px;
+        cursor: pointer;
+        margin: auto;
+      }   
+    
+ 
+    .option { padding: 5px 15px; border-radius: 0 4px 4px 0; text-align: left; }
+    .correct {  color: white; background-color: #047c31!important; border: 0;  } 
+    .incorrect {  color: white; background-color: #ff3333!important; border: 0; }
+    .row-container { padding: 5px; }
+    .row-container:after { content: "";  display: table;  clear: both;  }
+    .col-container { float: left; width: 50%; } 
+    .col-container.timer { float: left; width: 50%; text-align: right; }
+    .score_out { font-size: 32px; margin: 5px 0; }
+    .no_dp { border: 0; outline: 0; position: fixed; top: -999px; left: -999px; }
+    .res-bottom-label { font-size: 12px; color: #86a1ae; }
+    #result_out *, #timed_out * { display: inline-block; }
+    #result_out table, #timed_out { margin-bottom: 50px; }
+    .result_out:after { content: ""; display: table; clear: both; }
+    .option-c { padding: 10px 10px; width: 100%; }
+    .analysis p { text-align: left!important; }
+    .analysis { float: left; width: 50%; text-align: center; } 
+    .analysis p { display: block!important; } 
+
+.svg-score, .svg-accuracy, .svg-alert { color: #fff; font-size: 24px; }
+.svg-score { background-color: #233373; padding: 10px; border-radius: 50%; }
+.svg-accuracy { background-color: #f2a900; padding: 10px; border-radius: 50%; }
+.svg-alert{ background-color: #ff0000; padding: 10px; border-radius: 50%; }
+
+.bottom-link { text-align: center; }
+
+ .last-btn { color: white; font-size: 13px; } 
+  .last-btn-fa { color: #233373; }
+
+.last-btn {  cursor: pointer; color: #233373;
+    border: 1px solid #d3dce6;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin: 0 2px; 
+    text-decoration: none;
+  background-color: #f7fcff;
+}
+
+#finished_container { display: none; padding: 95px 0; width: 97%; max-width: 550px; margin: auto; background-color: #fff; }
+ #result_out, #timed_out { display: none; }
+
+
+    .option.show-correct{ color: #fff; background-color: #1a73e8; }
+    .option.correct{ color: white; background-color: #047c31!important; border: 0; }  
+    .option.wrong{ color: white; background-color: #ff3333!important; border: 0; }
+</style>
+
+<body onload="body(), fire_timer();">
+
+<script>function body() {  document.getElementById("start").click(); } </script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+ 
+
+ 
+
+<div data-id="0" onclick="selectCategory(this)" id="start"></div>
+
+<section class="quiz-box">   <!-- SOW QUIZ BOX -->
+     <span class="correct-answer no_dp"></span>
+
+      <hr style="border: 0; height: 1px; background-color: #ededed" /> 
+
+    
+    <div id="container" class="mw-fixed">
+   
+  <div class="row-container ques-timer">   <!-- QUIZ NOS TIMER -->
+<div class="col-container">
+   <span id="ques_no">01</span>/<span id="total_ques">/span>   </div>
+<div class="col-container timer"> 
+     <span class="minute">00</span>:<span class="second">00</span>  </div>
+    </div>   <!-- QUIZ NOS TIMER -->
+
+
+<div id="question" class="qtext question  question-text">  </div> 
+    
+      <div class="option-box" onclick="setTimeout(op, 1500);"></div>
+      <button class="next-ques no_dp" id="next">nextttttttttttttttttttttttttt btn</button>
+     <button class="no_dp" id="submit"  onclick="setTimeout(submit, 1500);">submitttttt</button> 
+     <button class="no_dp" id="result"  onclick="quiz_finished()">result</button> 
+
+    </div> 
+</section>
+
+
+<section id="finished_container">
+
+<div id="result_out" class="quiz-over-box">   <!-- SHOW RESULT -->
+<table class="analysis">
+<tr>
+<td><i class="fas fa-question-circle svg-score"></i></td>
+<td><p>
+<span id="total_questions"></span> 
+<span class="total-correct"></span>/<span class="total-questions"></span></p>
+<p class="res-bottom-label">Score</p>   
+</td>
+</tr>
+</table> 
+<table class="analysis">
+<tr>
+<td><i class="fas fa-fingerprint svg-accuracy"></i></td> 
+<td><p>
+<span id="percentage"></span>
+<span style="text-align: left!important;" class="total-percentage"> </span>  </p>
+<p class="res-bottom-label">Accuracy</p>
+</td>
+</tr></table>
+</div>   <!-- SHOW RESULT END -->
+ 
+<div id="timed_out">   <!-- SHOW TIMEOUT -->
+<i class="fas fa-exclamation-circle svg-alert"></i>
+<br /> <br />
+<p style="padding: 8px;">Sorry, your session has expired. Please refresh the page to continue.</p>
+</div>   <!-- SHOW TIMEOUT END -->
+ 
+<div class="bottom-link">   <!-- SHOW BTN -->
+<span class="last-btn" onclick="location.reload()"><i class="fas fa-redo last-btn-fa"></i>&nbsp; Test Again</span>
+&nbsp; &nbsp; &nbsp; &nbsp;
+<a class="last-btn" href="https://prep.aitt.in/2021/10/computer-software-application-mcqs-02.html"><i class="fas fa-file-alt last-btn-fa"></i>&nbsp; View Answer</a>
+</div>   <!-- SHOW BTN END -->
+
+</section>
+
+
+<script>
+mock_test=[{       qb_js:[
+
+  {"question": "National Skill Development Corporation (NSDC) of India was established in _____. <br/> &nbsp; &nbsp; &nbsp;  भ&#2366;रत म&#2375;&#2306; NSDC क&#2368; स&#2381;थ&#2366;पन&#2366; कब क&#2368; गई थ&#2368; ?",
+    "options":["2008","2011","2013", "2015"],
+    "answer":0},
+   {"question": "Information is stored inside the brain. Recalling some information from the brain due to the action of a certain stimulus is called ______. <br/> &nbsp; &nbsp; &nbsp;  ज&#2366;नक&#2366;र&#2368; मस&#2381;त&#2367;ष&#2381;क क&#2375; अ&#2306;दर स&#2306;ग&#2381;रह&#2367;त ह&#2379;त&#2368; ह&#2376;&#2404; एक न&#2367;श&#2381;च&#2367;त उद&#2381;द&#2368;पन क&#2368; क&#2381;र&#2367;य&#2366; क&#2375; क&#2366;रण मस&#2381;त&#2367;ष&#2381;क स&#2375; क&#2369;छ स&#2370;चन&#2366;ओ&#2306; क&#2379; य&#2366;द करन&#2366; ________ कहल&#2366;त&#2366; ह&#2376;&#2404;",
+    "options":["Retentions","Ability","Recollection", "Imagination"],
+    "answer":2},
+   {"question": "B.F. Skinner's theory of learning through the consequences of our behaviour is called ______. <br/> &nbsp; &nbsp; &nbsp;  हम&#2366;र&#2375; व&#2381;यवह&#2366;र क&#2375; पर&#2367;ण&#2366;म&#2379;&#2306; क&#2375; म&#2366;ध&#2381;यम स&#2375; स&#2368;खन&#2375; क&#2379; ब&#2368;.एफ. स&#2381;क&#2367;नर क&#2375; स&#2367;द&#2381;ध&#2366;&#2306;त क&#2379; ______ कह&#2366; ज&#2366;त&#2366; ह&#2376;",
+    "options":["Positive reinforcement","Classical conditioning","Operant conditioning", "Modelling"],
+    "answer":2},
+   {"question": "According to Maslow's Hierarchy of Needs Theory , the needs are classified into ______ levels. <br/> &nbsp; &nbsp; &nbsp;  म&#2376;स&#2381;ल&#2379; क&#2375; आवश&#2381;यकत&#2366; स&#2367;द&#2381;ध&#2366;&#2306;त क&#2375; अन&#2369;स&#2366;र, आवश&#2381;यकत&#2366;ओ&#2306; क&#2379; ______ स&#2381;तर&#2379;&#2306; म&#2375;&#2306; वर&#2381;ग&#2368;क&#2371;त क&#2367;य&#2366; गय&#2366; ह&#2376;&#2404;",
+    "options":["3","4","5", "6"],
+    "answer":2},
+   {"question": "While analyzing the syllabus, Jobs or experiences by which skills can be acquired and developed are related to ______. <br/> &nbsp; &nbsp; &nbsp;  प&#2366;ठ&#2381;यक&#2381;रम क&#2366; व&#2367;श&#2381;ल&#2375;षण करत&#2375; समय, क&#2366;र&#2381;य य&#2366; अन&#2369;भव ज&#2367;सक&#2375; द&#2381;व&#2366;र&#2366; क&#2380;शल ह&#2366;स&#2367;ल और व&#2367;कस&#2367;त क&#2367;य&#2366; ज&#2366; सकत&#2366; ह&#2376;, ______ स&#2375; स&#2306;ब&#2306;ध&#2367;त ह&#2376;&#2306;&#2404;",
+    "options":["Doing","Knowing","Being", "Orientation"],
+    "answer":0},
+   {"question": "How many reference methods are used for analyzing the syllabus or course content ? <br/> &nbsp; &nbsp; &nbsp;  प&#2366;ठ&#2381;यक&#2381;रम य&#2366; प&#2366;ठ&#2381;यक&#2381;रम स&#2366;मग&#2381;र&#2368; क&#2366; व&#2367;श&#2381;ल&#2375;षण करन&#2375; क&#2375; ल&#2367;ए क&#2367;तन&#2368; स&#2306;दर&#2381;भ व&#2367;ध&#2367;य&#2379;&#2306; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+    "options":["2","3","4", "5"],
+    "answer":0},
+   {"question": "With reference to Related Information, A motor car driver ______ all the driving techniques. <br/> &nbsp; &nbsp; &nbsp;  स&#2306;ब&#2306;ध&#2367;त ज&#2366;नक&#2366;र&#2368; क&#2375; स&#2306;दर&#2381;भ म&#2375;&#2306;, एक म&#2379;टर क&#2366;र च&#2366;लक क&#2379; सभ&#2368; ड&#2381;र&#2366;इव&#2367;&#2306;ग तकन&#2368;क क&#2379; ______.",
+    "options":["MUST KNOW","SHOULD KNOW","COULD KNOW", "WOULD KNOW"],
+    "answer":0},
+   {"question": "The Teacher End in the Distance Learning Program of DGT is known as ______. <br/> &nbsp; &nbsp; &nbsp;  ड&#2368;ज&#2368;ट&#2368; क&#2375; द&#2370;रस&#2381;थ श&#2367;क&#2381;ष&#2366; क&#2366;र&#2381;यक&#2381;रम म&#2375;&#2306; teacher end क&#2379; ______ क&#2375; र&#2370;प म&#2375;&#2306; ज&#2366;न&#2366; ज&#2366;त&#2366; ह&#2376;&#2404;",
+    "options":["Studio","Spoke","Classrooms", "Remote Centre"],
+    "answer":0},
+   {"question": "Effect of ______ is poor due to the little interaction between Teacher and Student. <br/> &nbsp; &nbsp; &nbsp;  ______ क&#2366; प&#2381;रभ&#2366;व श&#2367;क&#2381;षक और छ&#2366;त&#2381;र क&#2375; ब&#2368;च कम ब&#2366;तच&#2368;त क&#2375; क&#2366;रण खर&#2366;ब ह&#2376;&#2404;",
+    "options":["Hybrid Distance Learning Program","Synchronous Type Distance Learning Program","Asynchronous Type Distance Learning Program", "Fixed Time Online Distance Learning Program"],
+    "answer":2},
+   {"question": "Indira Gandhi National Open University, New Delhi was established by an act of Parliament of India in ______. <br/> &nbsp; &nbsp; &nbsp;  इ&#2306;द&#2367;र&#2366; ग&#2366;&#2306;ध&#2368; र&#2366;ष&#2381;ट&#2381;र&#2368;य म&#2369;क&#2381;त व&#2367;श&#2381;वव&#2367;द&#2381;य&#2366;लय, नई द&#2367;ल&#2381;ल&#2368; क&#2368; स&#2381;थ&#2366;पन&#2366; ______ म&#2375;&#2306; भ&#2366;रत क&#2368; स&#2306;सद क&#2375; एक अध&#2367;न&#2367;यम द&#2381;व&#2366;र&#2366; क&#2368; गई थ&#2368;&#2404;",
+    "options":["1985","1986","1987", "1988"],
+    "answer":0},
+   {"question": "Which one of the following is a visual aid? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न एक द&#2371;श&#2381;य सह&#2366;यक स&#2366;मग&#2381;र&#2368; ह&#2376;?",
+    "options":["Radio","Tape recorder","Slide projector", "All of these above"],
+    "answer":2},
+   {"question": "Which of the following is a component of a communication system? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न स&#2306;च&#2366;र प&#2381;रण&#2366;ल&#2368; क&#2366; भ&#2366;ग ह&#2376;?",
+    "options":["Source","Message","Receiver", "All of these above"],
+    "answer":3},
+   {"question": "Which of the following techniques gives the effect of the real situation? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न स&#2368; तकन&#2368;क सह&#2366;यक स&#2366;मग&#2381;र&#2368; क&#2368; व&#2366;स&#2381;तव&#2367;क स&#2381;थ&#2367;त&#2367; क&#2366; प&#2381;रभ&#2366;व द&#2375;त&#2368; ह&#2376;?",
+    "options":["Chart","Simulator","Magnetic board", "Chalkboard"],
+    "answer":1},
+   {"question": "Operation sheet is made by ______. <br/> &nbsp; &nbsp; &nbsp;  ऑपर&#2375;शन श&#2368;ट ______ द&#2381;व&#2366;र&#2366; बन&#2366;ई ज&#2366;त&#2368; ह&#2376;&#2404;",
+    "options":["Worker","Instructor","Student", "None of these above"],
+    "answer":1},
+   {"question": "Which of the following materials is prepared by a student? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न स&#2368; स&#2366;मग&#2381;र&#2368; छ&#2366;त&#2381;र द&#2381;व&#2366;र&#2366; त&#2376;य&#2366;र क&#2368; ज&#2366;त&#2368; ह&#2376;?",
+    "options":["Operation sheet","Information sheet","Assignment sheet", "None of these above"],
+    "answer":3},
+   {"question": "In WIM, what does W stands for - <br/> &nbsp; &nbsp; &nbsp;  WIM म&#2375;&#2306; W क&#2366; क&#2381;य&#2366; अर&#2381;थ ह&#2376; -",
+    "options":["Written","Writer","Worse", "Work"],
+    "answer":0},
+   {"question": "Which one of the following is characteristic of a test? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न एक पर&#2368;क&#2381;षण क&#2368; व&#2367;श&#2375;षत&#2366; ह&#2376;?",
+    "options":["Validity","Reliability","Objectivity", "All of these above"],
+    "answer":3},
+   {"question": "Which of the following is a type of objective type test? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न एक प&#2381;रक&#2366;र क&#2366; वस&#2381;त&#2369;न&#2367;ष&#2381;ठ प&#2381;रक&#2366;र क&#2366; पर&#2368;क&#2381;षण ह&#2376;?",
+    "options":["Fill in the blanks","True or false","Matching", "All of these above"],
+    "answer":3},
+   {"question": "Which one of the following is another name of a practical test? <br/> &nbsp; &nbsp; &nbsp;   न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न-स&#2366; एक प&#2381;र&#2366;य&#2379;ग&#2367;क पर&#2368;क&#2381;षण क&#2366; द&#2370;सर&#2366; न&#2366;म ह&#2376;?",
+    "options":["Performance test","Interview","Completion test", "Subjective test"],
+    "answer":0},
+   {"question":"Which one of the following is a type of display board? <br/> &nbsp; &nbsp; &nbsp;  न&#2367;म&#2381;नल&#2367;ख&#2367;त म&#2375;&#2306; स&#2375; क&#2380;न-स&#2366; एक प&#2381;रक&#2366;र क&#2366; ड&#2367;स&#2381;प&#2381;ल&#2375; ब&#2379;र&#2381;ड ह&#2376;?",
+    "options":["Magnetic board","Flannel board","Bulletin board", "All of these above"],
+    "answer":3}
+          ]}]   
+     
+     const _0x568486=_0xdd11;(function(_0x4c397e,_0x5c272c){const _0x4bfae3=_0xdd11,_0x22cc2e=_0x4c397e();while(!![]){try{const _0x2e223c=parseInt(_0x4bfae3(0x11a))/0x1+-parseInt(_0x4bfae3(0x12d))/0x2+parseInt(_0x4bfae3(0x134))/0x3+parseInt(_0x4bfae3(0x121))/0x4*(parseInt(_0x4bfae3(0x142))/0x5)+parseInt(_0x4bfae3(0x123))/0x6*(-parseInt(_0x4bfae3(0x13f))/0x7)+-parseInt(_0x4bfae3(0x14b))/0x8*(-parseInt(_0x4bfae3(0x140))/0x9)+parseInt(_0x4bfae3(0x13e))/0xa;if(_0x2e223c===_0x5c272c)break;else _0x22cc2e['push'](_0x22cc2e['shift']());}catch(_0x4104be){_0x22cc2e['push'](_0x22cc2e['shift']());}}}(_0x1ea6,0x5de64));const questionText=document[_0x568486(0x141)](_0x568486(0x137)),optionBox=document[_0x568486(0x141)]('.option-box'),nextQuestionBtn=document[_0x568486(0x141)](_0x568486(0x13b)),correctAnswer=document[_0x568486(0x141)](_0x568486(0x127)),seeResultBtn=document[_0x568486(0x141)](_0x568486(0x12c)),quizBox=document[_0x568486(0x141)](_0x568486(0x143)),quizOverBox=document['querySelector']('.quiz-over-box');let attemp=0x0,questionIndex=0x0,score=0x0,number=0x0,myArray=[],interval,categoryIndex;function selectCategory(_0x3a5814){const _0x3e7711=_0x568486;categoryIndex=_0x3a5814['getAttribute']('data-id'),quizBox[_0x3e7711(0x11b)][_0x3e7711(0x129)](_0x3e7711(0x130)),nextQuestion();}var ques_no=document['querySelector']('#ques_no'),total_ques=document['querySelector']('#total_ques');function load(){const _0x184d6e=_0x568486;number++,questionText['innerHTML']=mock_test[categoryIndex][_0x184d6e(0x132)][questionIndex]['question'],createOptions(),scoreBoard(),ques_no[_0x184d6e(0x11e)]=number,total_ques[_0x184d6e(0x11e)]=mock_test[categoryIndex][_0x184d6e(0x132)][_0x184d6e(0x13c)];var _0xe97256=document[_0x184d6e(0x122)](_0x184d6e(0x14a))[_0x184d6e(0x11e)],_0x24f45a=_0xe97256['length'];_0xe97256['length']<0x2&&(document[_0x184d6e(0x122)](_0x184d6e(0x14a))[_0x184d6e(0x11e)]='0'+_0xe97256);}function createOptions(){const _0x23457d=_0x568486;optionBox[_0x23457d(0x11e)]='';for(let _0x1a11d0=0x0;_0x1a11d0<mock_test[categoryIndex][_0x23457d(0x132)][questionIndex][_0x23457d(0x118)][_0x23457d(0x13c)];_0x1a11d0++){var _0x3674a4=document['createElement']('p');_0x3674a4[_0x23457d(0x11e)]+=mock_test[categoryIndex][_0x23457d(0x132)][questionIndex][_0x23457d(0x118)][_0x1a11d0],_0x3674a4[_0x23457d(0x11b)][_0x23457d(0x129)](_0x23457d(0x131)),_0x3674a4['id']=_0x1a11d0,_0x3674a4[_0x23457d(0x139)](_0x23457d(0x120),_0x23457d(0x11d)),optionBox['appendChild'](_0x3674a4);}}function generateRandomQuestion(){const _0x4e0243=_0x568486,_0x466adf=Math['floor'](Math[_0x4e0243(0x133)]()*mock_test[categoryIndex][_0x4e0243(0x132)][_0x4e0243(0x13c)]);let _0x500d5e=0x0;if(myArray[_0x4e0243(0x13c)]==0x0)questionIndex=_0x466adf;else{for(let _0x5d067f=0x0;_0x5d067f<myArray['length'];_0x5d067f++){_0x466adf==myArray[_0x5d067f]&&(_0x500d5e=0x1);}if(_0x500d5e==0x1){generateRandomQuestion();return;}else questionIndex=_0x466adf;}myArray[_0x4e0243(0x148)](_0x466adf),load();}function check(_0x2d4f52){const _0x5ec3f9=_0x568486,_0x431cd7=_0x2d4f52['id'];if(_0x431cd7==mock_test[categoryIndex]['qb_js'][questionIndex][_0x5ec3f9(0x126)])_0x2d4f52[_0x5ec3f9(0x11b)][_0x5ec3f9(0x129)](_0x5ec3f9(0x12b)),score++,scoreBoard();else{_0x2d4f52['classList'][_0x5ec3f9(0x129)]('wrong');for(let _0x4e87f5=0x0;_0x4e87f5<optionBox[_0x5ec3f9(0x12f)]['length'];_0x4e87f5++){optionBox[_0x5ec3f9(0x12f)][_0x4e87f5]['id']==mock_test[categoryIndex][_0x5ec3f9(0x132)][questionIndex][_0x5ec3f9(0x126)]&&optionBox[_0x5ec3f9(0x12f)][_0x4e87f5][_0x5ec3f9(0x11b)][_0x5ec3f9(0x129)](_0x5ec3f9(0x128));}}attemp++,disableOptions(),showNextQuestionBtn(),number==mock_test[categoryIndex]['qb_js'][_0x5ec3f9(0x13c)]&&(btn_disabled(),quizOver(),document[_0x5ec3f9(0x122)](_0x5ec3f9(0x144))[_0x5ec3f9(0x12a)]());}function disableOptions(){const _0x46000a=_0x568486;for(let _0x8b11af=0x0;_0x8b11af<optionBox[_0x46000a(0x12f)][_0x46000a(0x13c)];_0x8b11af++){optionBox[_0x46000a(0x12f)][_0x8b11af][_0x46000a(0x125)](_0x46000a(0x120));}}function timeIsUp(){disableOptions(),showNextQuestionBtn(),btn_disabled();}function showNextQuestionBtn(){const _0x5e55be=_0x568486;nextQuestionBtn[_0x5e55be(0x11b)][_0x5e55be(0x129)](_0x5e55be(0x130));}function hideNextQuestionBtn(){const _0x12eaa6=_0x568486;nextQuestionBtn['classList']['remove'](_0x12eaa6(0x130));}function scoreBoard(){correctAnswer['innerHTML']=score;}nextQuestionBtn[_0x568486(0x136)](_0x568486(0x12a),nextQuestion);function _0x1ea6(){const _0x59a070=['739336tCfQyz','remove','children','show','option','qb_js','random','1223394JgrLOq','.total-correct','addEventListener','.question-text','block','setAttribute','.total-questions','.next-ques','length','display','4226760Wkddwi','11515cQSmdg','18ovCHjZ','querySelector','355ZiPndE','.quiz-box','submit','none','result_out','result','push','finished_container','ques_no','578064vZhHPM','options','style','374674qACyiy','classList','disabled','check(this)','innerHTML','next','onclick','284lQrSmd','getElementById','2190zjzNVl','container','removeAttribute','answer','.correct-answer','show-correct','add','click','correct','#submit'];_0x1ea6=function(){return _0x59a070;};return _0x1ea6();}function nextQuestion(){generateRandomQuestion(),hideNextQuestionBtn();}function quizResult(){const _0x1a755b=_0x568486;document[_0x1a755b(0x141)](_0x1a755b(0x13a))['innerHTML']=mock_test[categoryIndex][_0x1a755b(0x132)][_0x1a755b(0x13c)],document['querySelector']('.total-correct')[_0x1a755b(0x11e)]=score;var _0x38ca79=document[_0x1a755b(0x141)](_0x1a755b(0x135))[_0x1a755b(0x11e)],_0x4b5c72=_0x38ca79['length'];_0x38ca79[_0x1a755b(0x13c)]<0x2&&(document['querySelector'](_0x1a755b(0x135))['innerHTML']='0'+_0x38ca79);var _0x2de448=score/mock_test[categoryIndex][_0x1a755b(0x132)][_0x1a755b(0x13c)]*0x64;(_0x2de448+'')[_0x1a755b(0x13c)]==0x1&&(_0x2de448='0'+_0x2de448),document[_0x1a755b(0x141)]('.total-percentage')[_0x1a755b(0x11e)]=_0x2de448+'%';}function quizOver(){const _0x574c67=_0x568486;nextQuestionBtn['classList']['remove'](_0x574c67(0x130)),btn_disabled(),seeResultBtn[_0x574c67(0x11b)][_0x574c67(0x129)]('show'),timer['stop']();}function _0xdd11(_0xe8dd84,_0x484705){const _0x1ea63e=_0x1ea6();return _0xdd11=function(_0xdd119a,_0x2cfa38){_0xdd119a=_0xdd119a-0x118;let _0x59d77c=_0x1ea63e[_0xdd119a];return _0x59d77c;},_0xdd11(_0xe8dd84,_0x484705);}function quiz_finished(){const _0x1ecd50=_0x568486;document[_0x1ecd50(0x122)](_0x1ecd50(0x124))[_0x1ecd50(0x119)][_0x1ecd50(0x13d)]=_0x1ecd50(0x145),document[_0x1ecd50(0x122)](_0x1ecd50(0x149))[_0x1ecd50(0x119)][_0x1ecd50(0x13d)]='block',document[_0x1ecd50(0x122)](_0x1ecd50(0x146))[_0x1ecd50(0x119)]['display']=_0x1ecd50(0x138);}seeResultBtn[_0x568486(0x136)](_0x568486(0x12a),()=>{const _0x7a11c=_0x568486;quizBox[_0x7a11c(0x11b)][_0x7a11c(0x12e)](_0x7a11c(0x130)),seeResultBtn[_0x7a11c(0x11b)]['remove'](_0x7a11c(0x130)),quizOverBox[_0x7a11c(0x11b)]['add'](_0x7a11c(0x130)),quizResult();});function op(){const _0x3b4aa3=_0x568486;document[_0x3b4aa3(0x122)](_0x3b4aa3(0x11f))['click'](),console['clear'](),document[_0x3b4aa3(0x122)](_0x3b4aa3(0x11f))[_0x3b4aa3(0x11c)]=!![],setTimeout(function(){const _0x275f95=_0x3b4aa3;document['getElementById']('next')[_0x275f95(0x11c)]=![];},0x640);}function btn_disabled(){const _0x5c57b6=_0x568486;document['getElementById'](_0x5c57b6(0x147))[_0x5c57b6(0x11c)]=!![],setTimeout(function(){const _0x3c6a91=_0x5c57b6;document[_0x3c6a91(0x122)]('result')[_0x3c6a91(0x11c)]=![];},0x640);}function submit(){quiz_finished(),console['clear']();} 
+
+ function fire_timer() {   timer.reset(900),  timer.start(1000)   } 
+    
+    function _timer(t){var e,i=0,n=1,o=0;return this.start=function(u){u=void 0!==u?u:1e3,0==o&&(o=1,e=setInterval(function(){switch(n){default:i&&(i--,r(),"function"==typeof t&&t(i));break;case 1:i<86400&&(i++,r(),"function"==typeof t&&t(i))}},u))},this.stop=function(){1==o&&(o=0,clearInterval(e))},this.reset=function(t){i=t=void 0!==t?t:0,r()},this.mode=function(t){n=t},this.getTime=function(){return i},this.getMode=function(){return n},this.getStatus,o;function r(){var t=i%60,e=Math.floor(i/60)%60,n=Math.floor(i/3600)%60;t=t<10?"0"+t:t,e=e<10?"0"+e:e,n=n<10?"0"+n:n,$(".timer .second").html(t),$(".timer .minute").html(e),$(".timer .hour").html(n)}}var timer;$(document).ready(function(t){(timer=new _timer(function(t)
+    {0==t&&(timer.stop(),
+   document.getElementById("reload_btn").click(),
+
+       document.getElementById("container").style.display = "none",
+      document.getElementById("finished_container").style.display = "block",
+      document.getElementById("timed_out").style.display = "block",
+
+    document.getElementById("quiz_result_submit").click(),
+     removeElement()  
+    )})).reset(0),timer.mode(0)}); 
+  
+</script>
+
+     
+              
